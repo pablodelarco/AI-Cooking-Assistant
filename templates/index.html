@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+    </nav>
+
+
+    <div id="home" class="content-section">
+        <h1>Chef-GPT</h1>
+        <h2>Enter the ingredients you like and discover delicious recipes to try!</h2>
+        <form action="/get-recipe" method="post">
+            <input type="text" name="ingredients" placeholder="Enter ingredients" required>
+            <button type="submit">Get Recipe</button>
+        </form>
+        <!-- Recipes Grid -->
+        <div class="recipe-grid">
+            {% for recipe in recipes %}
+            <div class="recipe-card" onclick="showRecipeDetails(this)" data-details="{{ recipe.details|escape }}"
+                data-source="{{ recipe.source }}">
+                <h3>{{ recipe.title }}</h3>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Modal for displaying recipe details -->
+    <div id="recipe-details-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-recipe-title"></h2>
+            <div id="modal-recipe-details"></div>
+            <a id="modal-recipe-source" href="#" target="_blank"
+                style="color: blue; text-decoration: underline; display: block; margin-top: 10px;">Full Recipe</a>
+        </div>
+    </div>
+
+    <div id="about" class="content-section">
+        <!-- About content -->
+    </div>
+
+    <div id="contact" class="content-section">
+        <!-- Contact content -->
+    </div>
+
+    <script>
+        // Update the script to include the source URL in the modal
+        function showRecipeDetails(element) {
+            var title = element.querySelector('h3').innerText;
+            var details = element.getAttribute('data-details');
+            var source = element.getAttribute('data-source');
+
+            document.getElementById('modal-recipe-title').innerText = title;
+            document.getElementById('modal-recipe-details').innerText = details;
+
+            // Set the href for the source link
+            var sourceElement = document.getElementById('modal-recipe-source');
+
+            // Check if the source URL includes 'http://' or 'https://'
+            // If not, prepend 'https://' to the URL
+            var source = element.getAttribute('data-source');
+            if (!source.startsWith('http://') && !source.startsWith('https://')) {
+                source = 'https://' + source;
+            }
+
+            sourceElement.href = source;
+            sourceElement.innerText = 'Go to Recipe Source';
+
+            document.getElementById('recipe-details-modal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('recipe-details-modal').style.display = 'none';
+            // Reset the source link
+            document.getElementById('modal-recipe-source').href = '#';
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onload = function () {
+            // Check if the URL contains a hash and scroll to the corresponding section
+            if (window.location.hash) {
+                var section = document.querySelector(window.location.hash);
+                if (section) {
+                    section.scrollIntoView();
+                }
+            }
+        };
+    </script>
+</body>
+
+</html>

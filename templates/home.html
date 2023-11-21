@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block content %}
+<div id="home" class="content-section">
+    <h1>Chef-GPT</h1>
+    <h2>Enter the ingredients you like and discover delicious recipes to try!</h2>
+    <form action="/get-recipe" method="post">
+        <input type="text" name="ingredients" placeholder="Enter ingredients" required>
+        <button type="submit">Get Recipe</button>
+    </form>
+    <!-- Recipes Grid -->
+    <div class="recipe-grid">
+        {% for recipe in recipes %}
+        <div class="recipe-card" onclick="showRecipeDetails(this)" data-details="{{ recipe.details|escape }}"
+            data-source="{{ recipe.source }}">
+            <h3>{{ recipe.title }}</h3>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<!-- Modal for displaying recipe details -->
+<div id="recipe-details-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="modal-recipe-title"></h2>
+        <div id="modal-recipe-details"></div>
+        <a id="modal-recipe-source" href="#" target="_blank"
+            style="color: blue; text-decoration: underline; display: block; margin-top: 10px;">Full Recipe</a>
+    </div>
+</div>
+
+<div id="about" class="content-section">
+    <!-- About content -->
+</div>
+
+<div id="contact" class="content-section">
+    <!-- Contact content -->
+</div>
+
+<script>
+    // Update the script to include the source URL in the modal
+    function showRecipeDetails(element) {
+        var title = element.querySelector('h3').innerText;
+        var details = element.getAttribute('data-details');
+        var source = element.getAttribute('data-source');
+
+        // Debugging
+        console.log("Title:", title);
+        console.log("Details:", details);
+        console.log("Source:", source);
+
+        document.getElementById('modal-recipe-title').innerText = title;
+        document.getElementById('modal-recipe-details').innerText = details;
+
+        // Set the href for the source link
+        var sourceElement = document.getElementById('modal-recipe-source');
+        sourceElement.href = source.startsWith('http://') || source.startsWith('https://') ? source : 'https://' + source;
+        sourceElement.innerText = 'Go to Recipe Source';
+
+        document.getElementById('recipe-details-modal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('recipe-details-modal').style.display = 'none';
+        document.getElementById('modal-recipe-source').href = '#';
+    }
+
+    // Scroll to section if URL has hash on page load
+    window.onload = function () {
+        if (window.location.hash) {
+            var section = document.querySelector(window.location.hash);
+            if (section) {
+                section.scrollIntoView();
+            }
+        }
+    };
+</script>
+{% endblock %}

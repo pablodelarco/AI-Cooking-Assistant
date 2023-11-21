@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Include your stylesheet, favicon, and other head elements here -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+    </nav>
+
+    {% block content %}
+    <!-- Content will be inserted here from child templates -->
+    {% endblock %}
+</body>
+
+</html>
