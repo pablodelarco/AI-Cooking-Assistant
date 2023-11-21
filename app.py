@@ -1,7 +1,7 @@
 import os
 import json
 from dotenv import load_dotenv
-import openai  # Corrected import
+import openai  
 
 from flask import Flask, render_template, request, jsonify
 
