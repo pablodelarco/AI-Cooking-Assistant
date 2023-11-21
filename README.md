@@ -19,10 +19,6 @@ AI Cooking Assistant is designed to help you figure out what to cook with the in
 - Python (Flask) for the backend server
 - OpenAI API for generating recipe suggestions
 
-## Setup and Installation
-
-(Include steps for setup and any installation requirements.)
-
 ## Usage
 
 1. Navigate to the website.
