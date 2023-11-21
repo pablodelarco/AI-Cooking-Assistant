@@ -2,12 +2,11 @@
 
 A web application that provides personalized recipe suggestions based on ingredients you have at hand, powered by OpenAI's GPT model.
 
+![image](https://github.com/pablodelarco/AI-Cooking-Assistant/assets/63775967/0afe0691-8988-4b3b-9da5-d271f4885bdb)
+
 ## Description
 
 AI Cooking Assistant is designed to help you figure out what to cook with the ingredients you already have. Simply input your available ingredients, and the AI will suggest a range of recipes for you to try out. This solution aims to reduce food waste and make cooking at home more accessible and creative.
-
-![image](https://github.com/pablodelarco/AI-Cooking-Assistant/assets/63775967/0afe0691-8988-4b3b-9da5-d271f4885bdb)
-
 
 ## Features
 
