@@ -1,4 +1,4 @@
-# AI Cooking Assistant
+# Chef-GPT: AI Cooking Assistant
 
 A web application that provides personalized recipe suggestions based on ingredients you have at hand, powered by OpenAI's GPT model.
 
