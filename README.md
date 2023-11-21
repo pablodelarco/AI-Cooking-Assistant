@@ -16,7 +16,7 @@ AI Cooking Assistant is designed to help you figure out what to cook with the in
 ## Technologies Used
 
 - HTML5, CSS3, JavaScript for frontend development
-- Flask for the backend server
+- Python (Flask) for the backend server
 - OpenAI API for generating recipe suggestions
 
 ## Setup and Installation
