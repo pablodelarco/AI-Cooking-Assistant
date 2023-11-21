@@ -1,7 +1,7 @@
 import os
 import json
 from dotenv import load_dotenv
-import openai  
+import openai
 
 from flask import Flask, render_template, request, jsonify
 
@@ -10,7 +10,7 @@ load_dotenv()
 app = Flask(__name__)
 
 # Set the OpenAI API key
-openai.api_key = os.environ.get("OPENAI_API_KEY")
+openai.api_key = os.environ["OPENAI_API_KEY"]
 
 
 @app.route("/")
@@ -62,7 +62,7 @@ def chat_with_gpt(ingredients):
     ingredients_str = ", ".join(ingredients)
     system_message = {
         "role": "system",
-        "content": f"You are a recipe assistant. Provide 5 recipes based on the following ingredients: {ingredients_str} "
+        "content": f"You are a recipe assistant. Provide 3 recipes based on the following ingredients: {ingredients_str} "
         f"Please format the output as JSON with each recipe having a 'title', 'instructions'and 'source'. Source is the link where you found the recipe.",
     }
     # Construct the user input message
@@ -71,15 +71,17 @@ def chat_with_gpt(ingredients):
         "content": f"I have the following ingredients: {ingredients_str}",
     }
     try:
-        response = openai.ChatCompletion.create(
+        response = openai.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[system_message, user_input],
         )
 
-        chatbot_response = response.choices[0].message["content"].strip()
+        chatbot_response = response.choices[0].message.content.strip()
+        
         print("ChatGPT response:", chatbot_response)
+
         return chatbot_response
-    except openai.error.OpenAIError as e:
+    except openai.OpenAIError as e:
         # Log the error for debugging purposes
         print(f"An error occurred: {e}")
         # Return a custom error message or code
