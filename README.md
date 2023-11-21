@@ -26,14 +26,6 @@ AI Cooking Assistant is designed to help you figure out what to cook with the in
 3. Click 'Get Recipe' to receive suggestions.
 4. Click on a recipe card to view detailed instructions.
 
-## Contribution
-
-(Provide guidelines on how others can contribute to your project.)
-
 ## Credits
 
 Thanks to OpenAI for providing the GPT API used in this project.
-
-## License
-
-(Include information about your project's license.)
